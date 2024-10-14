@@ -67,5 +67,21 @@
     <div id="twelve"></div>
     <div id="thirteen"></div>
     <div id="fourteen"></div>
+
+    <script>
+        // Fetch the values from local storage
+        const fare = localStorage.getItem('fare_price');
+        const from = localStorage.getItem('from');
+        const to = localStorage.getItem('to');
+
+        // Display the values in the input fields
+        document.querySelector('.second').value = from || '';
+        document.querySelector('.third').value = to || '';
+        document.querySelector('.fourth').value = fare || '';
+
+        // Optional: Generate a random ID and display it (if needed)
+        const ticketId = Math.floor(Math.random() * 1000000);
+        document.querySelector('.first').value = ticketId;
+    </script>
 </body>
 </html>
