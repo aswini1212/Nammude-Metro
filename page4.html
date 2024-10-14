@@ -31,9 +31,7 @@
     <input type="text" id="pass" name="pass">
 
     <div class="ok">
-        <a href="./page5.html" style="text-decoration: none;">
-            <h3 id="okbtn">OK</h3>
-        </a>
+        <h3 id="okbtn">OK</h3>
     </div>
 
     <footer>
@@ -85,7 +83,8 @@
                 localStorage.setItem('to', end);
                 
                 // Redirect to another page if necessary
-                window.location.href = './page5.html';
+                //window.location.href = './page5.html';
+                window.location.replace('page5.html');
             } else {
                 alert('No fare found for the selected route.');
             }
