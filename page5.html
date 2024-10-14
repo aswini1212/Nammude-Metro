@@ -38,7 +38,7 @@
         <h4 id="fare">Fare</h4>
         <input type="text" class="fourth" value="" disabled>
 
-        <div class="ok">
+        <div class="ok" id="print">
             <h3 id="okbtn">PRINT</h3>
         </div>
 
@@ -67,7 +67,7 @@
     <div id="twelve"></div>
     <div id="thirteen"></div>
     <div id="fourteen"></div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         // Fetch the values from local storage
         const fare = localStorage.getItem('fare_price');
@@ -82,6 +82,22 @@
         // Optional: Generate a random ID and display it (if needed)
         const ticketId = Math.floor(Math.random() * 1000000);
         document.querySelector('.first').value = ticketId;
+
+
+        document.getElementById('print').addEventListener('click', function () {
+            // Get the input text
+            const inputText = `from: ${from}\nto: ${to}\nfare: ${fare}\n`
+
+            // Create a new jsPDF instance
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add text to the PDF
+            doc.text(inputText, 10, 10);
+
+            // Save the generated PDF
+            doc.save('ticket.pdf');
+        });
     </script>
 </body>
 </html>
