@@ -57,36 +57,45 @@
     <div id="twelve"></div>
     <div id="thirteen"></div>
     <div id="fourteen"></div>
-    <script type = "module" crossorigin="anonymous">
-        // Import Supabase (assuming you have access to the Supabase library)
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+   <script type="module" crossorigin="anonymous">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-// Initialize Supabase
-const supabaseUrl = 'https://owimaafcnxffuupkgcej.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93aW1hYWZjbnhmZnV1cGtnY2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg4MjEwNzQsImV4cCI6MjA0NDM5NzA3NH0.cv3cnv77GJ--TZQPrhA4wNnfwSfR3W1QrWCyLl2u88I';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    const supabaseUrl = 'https://owimaafcnxffuupkgcej.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93aW1hYWZjbnhmZnV1cGtnY2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg4MjEwNzQsImV4cCI6MjA0NDM5NzA3NH0.cv3cnv77GJ--TZQPrhA4wNnfwSfR3W1QrWCyLl2u88I';
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-document.getElementById('okbtn').addEventListener('click', async () => {
-    const name = document.getElementById('fname').value;
-    const password = document.getElementById('pass').value;
-    const phone = document.getElementById('phne').value;
-    console.log("helli")
-    // Insert user into the users table
-    const { data, error } = await supabase
-        .from('Passenger')
-        .insert([{ P_Name: name, Password: password, Phone_No: phone }]);
-    
-    if (error) {
-        console.error('Error inserting user:', error);
-    } else {
-        console.log('User added:', data);
-        // Optionally redirect or show a success message
-        window.location.href = './page4.html'; // Redirect to next page
-    }
-});
+    document.getElementById('okbtn').addEventListener('click', async (event) => {
+        event.preventDefault(); // Prevent the default form submission
 
+        // Get user inputs
+        const name = document.getElementById('fname').value;
+        const password = document.getElementById('pass').value;
+        const phone = document.getElementById('phne').value;
 
-    </script>
+        console.log("Name:", name);
+        console.log("Password:", password);
+        console.log("Phone:", phone);
+
+        // Check if inputs are not empty
+        if (!name || !password || !phone) {
+            console.error("All fields must be filled");
+            return;
+        }
+
+        // Insert data into Supabase
+        const { data, error } = await supabase
+            .from('Passenger')
+            .insert([{ P_Name: name, Password: password, Phone_No: phone }]);
+
+        if (error) {
+            console.error('Error inserting user:', error);
+        } else {
+            console.log('User added:', data);
+            // Optionally redirect after successful insertion
+            window.location.href = './page4.html';
+        }
+    });
+</script>
 
 </body>
 </html>
